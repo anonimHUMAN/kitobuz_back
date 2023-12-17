@@ -143,7 +143,7 @@ exports.addbook = async (req, res) => {
         res.json({ title: "Error", message: "Ucer not found!" })
     } else if (newUcer) {
         if (book) {
-            let data = await Ucer.findByIdAndUpdate(newUcer[0]?._id, { books: [book] })
+            let data = await Ucer.findByIdAndUpdate(newUcer._id, { $push: { books: book } })
             res.json({ title: "Success", message: 'Book successfully added!' });
         } else {
             res.json({ title: "Error: Book is not defined" })

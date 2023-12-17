@@ -179,7 +179,7 @@ exports.addBookToGroup = async (req, res) => {
         res.json({ title: "Error", message: "Author not found!" })
     } else if (newUcer) {
         if (book) {
-            let data = await Ucer.findByIdAndUpdate(newUcer._id, { books: [book] })
+            let data = await Ucer.findByIdAndUpdate(newUcer._id, { $push: { books: book } })
             res.json({ title: "Success", message: 'Book successfully added!' });
         } else {
             res.json({ title: "Error: Body is not defined" })
